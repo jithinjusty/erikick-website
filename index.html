@@ -40,14 +40,18 @@
             cursor: pointer;
         }
 
-        .glass:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        @media (min-width: 768px) {
+            .glass:hover {
+                background: rgba(255, 255, 255, 0.9);
+                transform: scale(1.05) translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
         }
 
+        /* Mobile specific active state */
         .glass:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
+            background: rgba(255, 255, 255, 1);
         }
         
         .float { animation: floating 4s ease-in-out infinite; }
@@ -57,24 +61,18 @@
             100% { transform: translateY(0px); }
         }
 
-        /* Magnetic Button Effect */
         .btn-interact {
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-        }
-        .btn-interact:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(202, 138, 4, 0.3);
         }
         .btn-interact:active {
-            transform: translateY(1px);
+            transform: scale(0.95);
         }
     </style>
 </head>
 <body class="text-gray-900">
 
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
         
         <div class="video-container">
             <video autoplay muted loop playsinline>
@@ -82,95 +80,90 @@
             </video>
         </div>
 
-        <div class="absolute inset-0 z-10 bg-black/50 backdrop-blur-[1px]"></div>
+        <div class="absolute inset-0 z-10 bg-black/60 backdrop-blur-[1px]"></div>
         
-        <div class="max-w-7xl mx-auto px-6 relative z-20 grid md:grid-cols-2 gap-12 items-center w-full">
+        <div class="max-w-7xl mx-auto px-6 relative z-20 flex flex-col md:grid md:grid-cols-2 gap-8 items-center w-full">
             
-            <div data-aos="fade-right" data-aos-duration="1000">
-                <span class="inline-block px-4 py-1 bg-yellow-600 text-white text-xs font-bold rounded-full mb-6 uppercase tracking-widest shadow-lg animate-bounce">
+            <div data-aos="fade-up" data-aos-duration="1000" class="text-center md:text-left order-1">
+                <span class="inline-block px-4 py-1 bg-yellow-600 text-white text-[10px] font-bold rounded-full mb-6 uppercase tracking-widest shadow-lg">
                     The Herbal Revolution
                 </span>
-                <h2 class="text-6xl md:text-8xl font-800 leading-tight mb-6 text-white italic">
+                <h2 class="text-5xl md:text-8xl font-800 leading-tight mb-6 text-white italic">
                     ഇനി ചായ <br><span class="text-yellow-500">എന്തിന്?</span>
                 </h2>
-                <p class="text-xl text-gray-200 mb-10 leading-relaxed max-w-lg">
-                    Experience the raw power of Ginger and Turmeric. 100% Natural. 0% Sugar. The only kick your body needs.
+                <p class="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed max-w-lg mx-auto md:mx-0">
+                    Experience the raw power of Ginger and Turmeric. 100% Natural. 0% Sugar.
                 </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#footer" class="btn-interact bg-yellow-600 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-xl block">Join the Waitlist</a>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <a href="#footer" class="btn-interact bg-yellow-600 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-xl text-center">Join the Waitlist</a>
                 </div>
             </div>
             
-            <div id="sachet-container" class="hidden md:block relative transition-transform duration-75 ease-out" data-aos="zoom-in" data-aos-duration="1200">
+            <div id="sachet-container" class="relative order-2 md:order-2 transition-transform duration-75 ease-out" data-aos="zoom-in" data-aos-delay="200">
                 <div class="float">
-                    <img src="sachet.png" id="sachet-img" alt="Eri Kick Sachet" class="mx-auto drop-shadow-2xl max-h-[400px] object-contain cursor-crosshair">
+                    <img src="sachet.png" id="sachet-img" alt="Eri Kick Sachet" class="mx-auto drop-shadow-2xl h-[300px] md:h-[400px] object-contain">
                 </div>
-                <div class="absolute -bottom-6 right-10 bg-white/90 p-5 rounded-2xl shadow-2xl backdrop-blur-md border border-yellow-200 pointer-events-none">
+                <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 bg-white/90 p-4 rounded-xl shadow-2xl backdrop-blur-md border border-yellow-200 w-[200px] text-center">
                     <p class="text-[10px] uppercase font-bold text-yellow-700 tracking-widest">Natural Power</p>
-                    <p class="text-lg font-bold">Just Add Hot Water</p>
+                    <p class="text-lg font-bold italic">Just Add Hot Water</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="product" class="py-32 px-6 bg-[#fdfbf7] relative z-30">
+    <section id="product" class="py-20 md:py-32 px-6 bg-[#fdfbf7] relative z-30">
         <div class="max-w-7xl mx-auto text-center">
-            <h3 class="text-5xl font-800 mb-16" data-aos="fade-up">എരിയും പുളിയും ഇഞ്ചിയും!</h3>
-            <div class="grid md:grid-cols-4 gap-8 text-left">
-                <div class="glass p-10 rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-5xl mb-6">🍋</div>
+            <h3 class="text-4xl md:text-5xl font-800 mb-12 md:mb-16" data-aos="fade-up">എരിയും പുളിയും ഇഞ്ചിയും!</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-left">
+                <div class="glass p-8 md:p-10 rounded-[30px] md:rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4">🍋</div>
                     <h4 class="text-xl font-bold mb-2 uppercase">Fresh Lemon</h4>
-                    <p class="opacity-70 text-sm">Zesty Vitamin C to ignite your metabolism. Click to learn more.</p>
+                    <p class="opacity-70 text-sm">Zesty Vitamin C to ignite your metabolism.</p>
                 </div>
-                <div class="glass p-10 rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-5xl mb-6">🫚</div>
+                <div class="glass p-8 md:p-10 rounded-[30px] md:rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4">🫚</div>
                     <h4 class="text-xl font-bold mb-2 uppercase">Pure Ginger</h4>
                     <p class="opacity-70 text-sm">The heat that aids digestion and focus.</p>
                 </div>
-                <div class="glass p-10 rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="300">
-                    <div class="text-5xl mb-6">🌿</div>
+                <div class="glass p-8 md:p-10 rounded-[30px] md:rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4">🌿</div>
                     <h4 class="text-xl font-bold mb-2 uppercase">Turmeric</h4>
                     <p class="opacity-70 text-sm">Golden immunity for the modern lifestyle.</p>
                 </div>
-                <div class="glass p-10 rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="400">
-                    <div class="text-5xl mb-6">🍃</div>
+                <div class="glass p-8 md:p-10 rounded-[30px] md:rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl mb-4">🍃</div>
                     <h4 class="text-xl font-bold mb-2 uppercase">Stevia</h4>
-                    <p class="opacity-70 text-sm">0 Calories. 0 Sugar. 100% Sweetness.</p>
+                    <p class="opacity-70 text-sm">0 Calories. 0 Sugar. 100% Natural Sweet.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="footer" class="py-32 px-6 text-center bg-white">
-        <div class="max-w-4xl mx-auto glass p-16 rounded-[60px] shadow-2xl" data-aos="zoom-out">
-            <h3 class="text-4xl font-800 mb-6 italic uppercase">Ready for the Kick?</h3>
-            <p class="mb-12 text-gray-500">Join the waitlist for the first batch.</p>
-            <form class="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto" onsubmit="event.preventDefault(); alert('Success! You are on the list.');">
-                <input type="email" placeholder="Enter your email" class="flex-1 px-8 py-5 rounded-2xl ring-2 ring-yellow-100 focus:ring-yellow-600 outline-none transition-all focus:bg-yellow-50" required>
-                <button type="submit" class="btn-interact bg-black text-white px-10 py-5 rounded-2xl font-bold">Notify Me</button>
+    <footer id="footer" class="py-20 md:py-32 px-6 text-center bg-white">
+        <div class="max-w-4xl mx-auto glass p-10 md:p-16 rounded-[40px] md:rounded-[60px] shadow-2xl" data-aos="zoom-out">
+            <h3 class="text-3xl md:text-4xl font-800 mb-4 md:mb-6 italic uppercase">Ready for the Kick?</h3>
+            <p class="mb-8 md:mb-12 text-gray-500 text-sm md:text-base">Join the waitlist for the first batch.</p>
+            <form class="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto" onsubmit="event.preventDefault(); alert('Success! Welcome to the Eri Kick squad.');">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-8 py-5 rounded-2xl ring-2 ring-yellow-100 focus:ring-yellow-600 outline-none transition-all text-center md:text-left" required>
+                <button type="submit" class="btn-interact bg-black text-white px-10 py-5 rounded-2xl font-bold shadow-lg">Notify Me</button>
             </form>
         </div>
+        <p class="mt-12 text-[10px] text-gray-400 font-bold tracking-widest uppercase">www.erikick.com</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ once: true });
+        AOS.init({ once: true, disable: 'mobile' }); // Disable AOS on mobile for better performance if needed
 
-        // PARALLAX SACHET EFFECT
-        const sachetContainer = document.getElementById('sachet-container');
-        document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            sachetContainer.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
-
-        // Click Feedback for Ingredients
-        document.querySelectorAll('.glass').forEach(card => {
-            card.addEventListener('click', () => {
-                card.style.borderColor = '#ca8a04';
-                setTimeout(() => card.style.borderColor = 'rgba(255, 255, 255, 0.3)', 500);
+        // Only run 3D Parallax on Desktop
+        if (window.innerWidth > 768) {
+            const sachetContainer = document.getElementById('sachet-container');
+            document.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                sachetContainer.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
             });
-        });
+        }
     </script>
 </body>
 </html>
