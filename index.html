@@ -10,7 +10,6 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; overflow-x: hidden; background: #fdfbf7; }
         
-        /* THE FIX: Absolute positioning for video to keep it in the background */
         .video-container {
             position: absolute;
             top: 0;
@@ -33,13 +32,43 @@
             object-fit: cover;
         }
 
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .glass { 
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .glass:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .glass:active {
+            transform: scale(0.98);
+        }
         
         .float { animation: floating 4s ease-in-out infinite; }
         @keyframes floating {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
+        }
+
+        /* Magnetic Button Effect */
+        .btn-interact {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-interact:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(202, 138, 4, 0.3);
+        }
+        .btn-interact:active {
+            transform: translateY(1px);
         }
     </style>
 </head>
@@ -58,7 +87,7 @@
         <div class="max-w-7xl mx-auto px-6 relative z-20 grid md:grid-cols-2 gap-12 items-center w-full">
             
             <div data-aos="fade-right" data-aos-duration="1000">
-                <span class="inline-block px-4 py-1 bg-yellow-600 text-white text-xs font-bold rounded-full mb-6 uppercase tracking-widest shadow-lg">
+                <span class="inline-block px-4 py-1 bg-yellow-600 text-white text-xs font-bold rounded-full mb-6 uppercase tracking-widest shadow-lg animate-bounce">
                     The Herbal Revolution
                 </span>
                 <h2 class="text-6xl md:text-8xl font-800 leading-tight mb-6 text-white italic">
@@ -68,15 +97,15 @@
                     Experience the raw power of Ginger and Turmeric. 100% Natural. 0% Sugar. The only kick your body needs.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#footer" class="bg-yellow-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white hover:text-black transition-all shadow-xl">Join the Waitlist</a>
+                    <a href="#footer" class="btn-interact bg-yellow-600 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-xl block">Join the Waitlist</a>
                 </div>
             </div>
             
-            <div class="hidden md:block relative" data-aos="zoom-in" data-aos-duration="1200">
+            <div id="sachet-container" class="hidden md:block relative transition-transform duration-75 ease-out" data-aos="zoom-in" data-aos-duration="1200">
                 <div class="float">
-                    <img src="sachet.png" alt="Eri Kick Sachet" class="mx-auto drop-shadow-2xl max-h-[400px] object-contain">
+                    <img src="sachet.png" id="sachet-img" alt="Eri Kick Sachet" class="mx-auto drop-shadow-2xl max-h-[400px] object-contain cursor-crosshair">
                 </div>
-                <div class="absolute -bottom-6 right-10 bg-white/90 p-5 rounded-2xl shadow-2xl backdrop-blur-md">
+                <div class="absolute -bottom-6 right-10 bg-white/90 p-5 rounded-2xl shadow-2xl backdrop-blur-md border border-yellow-200 pointer-events-none">
                     <p class="text-[10px] uppercase font-bold text-yellow-700 tracking-widest">Natural Power</p>
                     <p class="text-lg font-bold">Just Add Hot Water</p>
                 </div>
@@ -88,22 +117,22 @@
         <div class="max-w-7xl mx-auto text-center">
             <h3 class="text-5xl font-800 mb-16" data-aos="fade-up">എരിയും പുളിയും ഇഞ്ചിയും!</h3>
             <div class="grid md:grid-cols-4 gap-8 text-left">
-                <div class="glass p-10 rounded-[40px] shadow-sm hover:translate-y-[-10px] transition-all" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass p-10 rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="100">
                     <div class="text-5xl mb-6">🍋</div>
                     <h4 class="text-xl font-bold mb-2 uppercase">Fresh Lemon</h4>
-                    <p class="opacity-70 text-sm">Zesty Vitamin C to ignite your metabolism.</p>
+                    <p class="opacity-70 text-sm">Zesty Vitamin C to ignite your metabolism. Click to learn more.</p>
                 </div>
-                <div class="glass p-10 rounded-[40px] shadow-sm hover:translate-y-[-10px] transition-all" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass p-10 rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="200">
                     <div class="text-5xl mb-6">🫚</div>
                     <h4 class="text-xl font-bold mb-2 uppercase">Pure Ginger</h4>
                     <p class="opacity-70 text-sm">The heat that aids digestion and focus.</p>
                 </div>
-                <div class="glass p-10 rounded-[40px] shadow-sm hover:translate-y-[-10px] transition-all" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass p-10 rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="300">
                     <div class="text-5xl mb-6">🌿</div>
                     <h4 class="text-xl font-bold mb-2 uppercase">Turmeric</h4>
                     <p class="opacity-70 text-sm">Golden immunity for the modern lifestyle.</p>
                 </div>
-                <div class="glass p-10 rounded-[40px] shadow-sm hover:translate-y-[-10px] transition-all" data-aos="fade-up" data-aos-delay="400">
+                <div class="glass p-10 rounded-[40px] shadow-sm" data-aos="fade-up" data-aos-delay="400">
                     <div class="text-5xl mb-6">🍃</div>
                     <h4 class="text-xl font-bold mb-2 uppercase">Stevia</h4>
                     <p class="opacity-70 text-sm">0 Calories. 0 Sugar. 100% Sweetness.</p>
@@ -116,9 +145,9 @@
         <div class="max-w-4xl mx-auto glass p-16 rounded-[60px] shadow-2xl" data-aos="zoom-out">
             <h3 class="text-4xl font-800 mb-6 italic uppercase">Ready for the Kick?</h3>
             <p class="mb-12 text-gray-500">Join the waitlist for the first batch.</p>
-            <form class="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
-                <input type="email" placeholder="Enter your email" class="flex-1 px-8 py-5 rounded-2xl ring-2 ring-yellow-100 focus:ring-yellow-600 outline-none" required>
-                <button type="submit" class="bg-black text-white px-10 py-5 rounded-2xl font-bold hover:bg-yellow-700 transition">Notify Me</button>
+            <form class="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto" onsubmit="event.preventDefault(); alert('Success! You are on the list.');">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-8 py-5 rounded-2xl ring-2 ring-yellow-100 focus:ring-yellow-600 outline-none transition-all focus:bg-yellow-50" required>
+                <button type="submit" class="btn-interact bg-black text-white px-10 py-5 rounded-2xl font-bold">Notify Me</button>
             </form>
         </div>
     </footer>
@@ -126,6 +155,22 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ once: true });
+
+        // PARALLAX SACHET EFFECT
+        const sachetContainer = document.getElementById('sachet-container');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            sachetContainer.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Click Feedback for Ingredients
+        document.querySelectorAll('.glass').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.borderColor = '#ca8a04';
+                setTimeout(() => card.style.borderColor = 'rgba(255, 255, 255, 0.3)', 500);
+            });
+        });
     </script>
 </body>
 </html>
